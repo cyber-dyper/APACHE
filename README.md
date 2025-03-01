@@ -1,57 +1,104 @@
-# APACHE
-## Bienvenue sur ton premier projet Web !
-### SCENARIO
-Monter un site web Apache avec deux pattes réseaux : interne et externe.
+# 🌐 **APACHE - Déploiement d'un Serveur Web Sécurisé** 🛠️
 
-À ta disposition, les fichiers des deux vhosts qui simulent l’arborescence des sources sur le serveur.
+## 🎉 **Bienvenue sur ton premier projet Web !** 🚀
 
-Liens 1
-Liens 2
+Dans ce projet, tu vas apprendre à monter un serveur **Apache** avec une **double interface réseau** pour créer un environnement **web sécurisé** et **optimisé**. 
 
-## CONFIGURATION
-### Réseau :
-Intranet sur le 192.168.100.0/24.
-Extranet en 10.0.40.0/16, par exemple.
+---
 
-### Système :
-Une distribution Debian en version minimale (pas d’environnement de bureau) pour projet serveur.
+## 🎯 **SCÉNARIO : Déploiement d'un Site Web Apache**
 
-### Service Web :
-Installation du serveur HTTPD d'Apache dans lequel tu créeras deux virtual hosts :
-- extranet.cyberdyper.com ;
-- admin.cyberdyper.com.
+🛠️ **Objectif :**  
+Mettre en place un **site web Apache** avec deux **interfaces réseau** : interne (intranet) et externe (extranet).
 
-Les deux vhosts doivent avoir leur fichier source nommé différemment. Crée donc deux répertoires :
-- /var/www/extranet.cyberdyper.com et ;
-- admin.cyberdyper.com par exemple.
+📂 **Ressources fournies :**  
+Tu trouveras dans ce dépôt les fichiers des **deux virtual hosts (vhosts)** qui simulent l'arborescence des sources sur le serveur.
 
-Le vhost extranet est publique, le vhost admin privée.
-Le port d’écoute pour le vhost admin est en 5501 pour le HTTP et 5502 pour le HTTPS, par exemple.
+🔗 **Liens utiles :**  
+- [Lien vers les fichiers VHost 1](#)  
+- [Lien vers les fichiers VHost 2](#)  
 
-Génère un certificat auto-signé wildcard pour les deux vhosts.
-Les requêtes entrantes HTTP sont à forcée vers HTTPS pour les deux vhosts.
-Crée deux fichiers de traces d’accès, un pour chaque vhost, et le même pour les erreurs. 
+---
 
-### Service FTP :
-Les développeurs vont avoir besoin d’accéder aux répertoires des codes sources des deux vhosts.
-Les graphistes doivent uniquement accéder aux répertoires des images des deux vhosts.
-Il faut également refuser les connexions anonymes.
+## 🌐 **CONFIGURATION DU PROJET**
 
-### Recommandations : 
-- Créer des groupes Linux pour gérer ces droits et inventer deux comptes nominatifs de test : un pour un développeur et un pour un graphiste.
-- Mise en place d’un cloisonnement via un chroot ou un jail sur ce service, pour bien le sécuriser.
-- Le service FTP doit être uniquement accessible sur la patte privée.
+### 📡 **Réseau :**  
+- **Intranet :** `192.168.100.0/24`  
+- **Extranet :** `10.0.40.0/16`  
 
-### Filtrage :
-Utilise netfilter pour ne laisser passer que le minimum de protocoles nécessaires.
-Utiliser des modules contre les attaques DDoS ou slow connections.
-Utilise Fail2Ban dans netfilter pour bloquer 35 mauvaises tentatives de connexion FTP d’affilée. 
-Idem pour 3 requêtes sur un fichier de l’arborescence des sites (avec temps de ban en minutes).
+### 💻 **Système :**  
+- Utilise une **distribution Debian minimale** (sans environnement de bureau) dédiée à un projet **serveur**.
 
-## LES LIVRABLES
-### Rassembler les fichiers de configuration des services;
-1. Web
-2. FTP
-3. Netfilter
-4. Fail2Ban
+---
 
+## 🌍 **Service Web : Apache HTTPD**
+
+1. **Installation du serveur Apache :**  
+   - Utilise `apt install apache2` pour installer le serveur web.
+
+2. **Création des Virtual Hosts :**  
+   - 🟢 **Extranet :** `extranet.cyberdyper.com` (Public)  
+   - 🔒 **Admin :** `admin.cyberdyper.com` (Privé)
+
+3. **Arborescence des répertoires :**  
+   - `/var/www/extranet.cyberdyper.com`  
+   - `/var/www/admin.cyberdyper.com`  
+
+4. **Configuration des ports d'écoute :**  
+   - **Admin en HTTP :** `5501`  
+   - **Admin en HTTPS :** `5502`  
+
+5. **Sécurité HTTPS :**  
+   - 🔑 **Générer un certificat auto-signé wildcard** pour les deux vhosts.  
+   - 🔐 **Forcer le passage en HTTPS** pour toutes les requêtes entrantes HTTP.
+
+6. **Gestion des logs :**  
+   - 📄 Crée deux **fichiers de logs d'accès**, un pour chaque vhost.  
+   - ⚠️ Utilise un **fichier commun** pour les erreurs.
+
+---
+
+## 📁 **Service FTP : Accès aux Fichiers**
+
+1. **Accès sécurisé :**  
+   - Les développeurs ont accès aux **codes sources** des deux vhosts.  
+   - Les graphistes accèdent uniquement aux **images** des deux vhosts.  
+   - ❌ **Refuser les connexions anonymes.**
+
+2. **Gestion des utilisateurs et permissions :**  
+   - 👨‍💻 Crée des **groupes Linux** pour gérer les droits d'accès.  
+   - 👤 **Utilisateurs de test :** Un **développeur** et un **graphiste**.
+
+3. **Cloisonnement du service FTP :**  
+   - 🔒 Mets en place un **chroot** ou un **jail** pour sécuriser l'accès.  
+   - 🛡️ **Accès FTP uniquement sur l'interface privée.**
+
+---
+
+## 🔥 **Filtrage & Sécurité : Netfilter & Fail2Ban**
+
+1. **Configuration de Netfilter :**  
+   - ⚙️ Autorise uniquement les **protocoles nécessaires** (HTTP, HTTPS, FTP privé).
+
+2. **Protection Anti-DDoS :**  
+   - Utilise des **modules de sécurité** contre les attaques **DDoS** et les **slow connections**.
+
+3. **Fail2Ban : Sécuriser les accès**  
+   - 🚫 Bloque **35 tentatives de connexion FTP échouées** d'affilée.  
+   - 🚦 Limite à **3 requêtes malveillantes** sur un fichier de l'arborescence des sites, avec un **temps de bannissement** paramétrable.
+
+---
+
+## 📦 **LIVRABLES : Fichiers de Configuration à Fournir**
+
+1. 🖥️ **Web :** Fichiers de configuration d'Apache (vhosts, SSL, logs).  
+2. 📂 **FTP :** Configuration des accès utilisateurs, droits et sécurisation.  
+3. 🔥 **Netfilter :** Script de configuration du pare-feu.  
+4. 🚫 **Fail2Ban :** Règles et configuration de sécurité.
+
+---
+
+## 🎯 **Objectif final :**  
+Créer un environnement web **sécurisé**, **fiable** et **performant**, tout en assurant une **gestion fine des accès** pour les développeurs et les graphistes. 
+
+✨ **Bonne configuration !** 🚀 Si tu as des questions, n'hésite pas à les poser dans les issues du dépôt. 😊
