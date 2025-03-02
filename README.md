@@ -84,7 +84,7 @@ Tu trouveras dans ce dépôt les fichiers des **deux virtual hosts (vhosts)** qu
    - Utilise des **modules de sécurité** contre les attaques **DDoS** et les **slow connections**.
 
 3. **Fail2Ban : Sécuriser les accès**  
-   - 🚫 Bloque **35 tentatives de connexion FTP échouées** d'affilée.  
+   - 🚫 Bloque **3 tentatives de connexion FTP échouées** d'affilée.  
    - 🚦 Limite à **3 requêtes malveillantes** sur un fichier de l'arborescence des sites, avec un **temps de bannissement** paramétrable.
 
 ---
